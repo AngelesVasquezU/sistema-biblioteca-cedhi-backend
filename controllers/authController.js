@@ -1,7 +1,7 @@
-// authController.js
 const jwt = require('jsonwebtoken');
 
 const roleMap = {
+  'owner': 1, // igual que el admin
   'admin': 1,
   'bibliotecario': 2,
   'tutor': 3
@@ -16,9 +16,9 @@ const loginWithToken = (req, res) => {
     const user = {
       userId: decoded.userId,
       email: decoded.email,
-      nombre: decoded.nombre || '',   // si PHP lo incluye
+      nombre: decoded.nombre || '',   
       apellido: decoded.apellido || '',
-      rol: roleMap[decoded.rol]
+      categoria: roleMap[decoded.rol]
     };
     return res.json({ success: true, user: user });
   } catch (error) {
